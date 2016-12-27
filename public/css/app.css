@@ -1,0 +1,270 @@
+@import url(bootstrap.min.css);
+a {
+  color: #146496;
+  transition: 0.3s all; }
+  a:hover {
+    color: #0b3753;
+    text-decoration: none; }
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999999; }
+
+.main-content {
+  margin-top: 5em; }
+
+.modal {
+  top: 3em; }
+
+.navbar {
+  border-radius: 0; }
+
+#register-form {
+  border-left: 1px solid #cccccc; }
+
+.birthdate input.form-control {
+  width: 32%; }
+
+.errors .error {
+  list-style: none; }
+
+div:not(.row) > .posts {
+  width: 60%; }
+
+.posts .post-form {
+  text-align: center;
+  border: 1px solid #cccccc;
+  margin-bottom: 2em; }
+  .posts .post-form h3 {
+    border-bottom: 1px solid #cccccc;
+    margin: 0 0 0.5em 0;
+    padding: 0.25em; }
+  .posts .post-form textarea {
+    margin-bottom: 0.5em; }
+  .posts .post-form form {
+    margin: 0 1em 0.5em; }
+  .posts .post-form input[type="file"] {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    z-index: -1;
+    overflow: hidden; }
+  .posts .post-form .btn {
+    padding: 0.5em 2em; }
+.posts .post {
+  margin: 1em auto;
+  border: 1px solid #cccccc;
+  padding: 1em;
+  position: relative; }
+  .posts .post .created-at {
+    float: right;
+    font-size: 0.9em;
+    margin-right: 1em; }
+    .posts .post .created-at .edited {
+      text-align: right;
+      font-size: 0.9em; }
+  .posts .post .created-by {
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em; }
+  .posts .post .content {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #cccccc; }
+  .posts .post .actions .post-action {
+    display: inline-block;
+    padding: 0.25em 1em;
+    border: 1px solid #cccccc; }
+  .posts .post .actions .post-like {
+    color: green; }
+    .posts .post .actions .post-like:hover {
+      background-color: rgba(0, 128, 0, 0.3); }
+  .posts .post .actions .post-dislike {
+    color: red; }
+    .posts .post .actions .post-dislike:hover {
+      background-color: rgba(255, 0, 0, 0.3); }
+  .posts .post .actions .liked {
+    text-decoration: underline; }
+  .posts .post .comments {
+    margin-top: 1em;
+    border-top: 1px solid #cccccc;
+    padding-top: 0.5em;
+    transform-origin: 0 0;
+    animation: 0.5s scaleY; }
+    .posts .post .comments .comment {
+      padding: 1em; }
+      .posts .post .comments .comment a, .posts .post .comments .comment div {
+        display: inline-block; }
+.posts .operations-button {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0; }
+.posts .operations {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -1px;
+  border: 1px solid #cccccc;
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  z-index: 9999;
+  animation: 0.5s scaleX; }
+  .posts .operations li {
+    list-style: none;
+    text-align: center; }
+    .posts .operations li a {
+      display: block;
+      padding: 0.5em 2em; }
+      .posts .operations li a:hover {
+        background: rgba(0, 0, 255, 0.2); }
+
+.user-avatar {
+  border: 1px solid #cccccc;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 4px; }
+
+.reactions, .search-results {
+  margin: 0;
+  padding: 0; }
+  .reactions li, .search-results li {
+    list-style: none;
+    margin-bottom: 1em; }
+    .reactions li:last-of-type, .search-results li:last-of-type {
+      margin-bottom: 0; }
+
+.reactions-link .glyphicon-thumbs-down {
+  transform: rotateY(180deg); }
+
+.user {
+  border: 1px solid #cccccc;
+  padding: 1em;
+  margin-bottom: 2em; }
+  .user .friends {
+    border: 1px solid #cccccc;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap; }
+    .user .friends .friend {
+      margin: 0.5em auto;
+      position: relative;
+      cursor: pointer; }
+      .user .friends .friend span {
+        position: absolute;
+        color: #2d9de3;
+        font-weight: bold;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+        width: 100%;
+        padding: 0.5em 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 999;
+        transform-origin: 0 100%;
+        transform: scaleY(0);
+        transition: 0.3s all; }
+      .user .friends .friend:hover span {
+        transform: scaleY(1); }
+  .user .friend-action {
+    float: right; }
+  .user .friend-action:first-of-type {
+    margin-left: 0.25em; }
+
+#friend-requests-li {
+  position: relative; }
+  #friend-requests-li #friend-requests-notify .count {
+    border-radius: 200%;
+    padding: 0 0.35em;
+    font-size: 0.8em;
+    background: red; }
+  #friend-requests-li #friend-notifications {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    min-width: 300px;
+    min-height: 100px;
+    border: 1px solid #cccccc;
+    background: #e6e6e6;
+    animation: 0.5s scaleY;
+    transform-origin: 0 0;
+    z-index: 9999; }
+
+.friend-requests {
+  margin: 0;
+  padding: 0.5em; }
+  .friend-requests li {
+    padding: 0;
+    list-style: none;
+    margin-bottom: 1.25em;
+    display: block;
+    border-bottom: 1px solid #cccccc; }
+    .friend-requests li:last-of-type {
+      border-bottom: 0;
+      margin-bottom: 0; }
+    .friend-requests li > a {
+      display: block; }
+    .friend-requests li > div {
+      margin-top: 1em;
+      height: auto;
+      padding-bottom: 1em; }
+    .friend-requests li .friend-action {
+      margin-top: 1em;
+      border-radius: 4px;
+      padding: 0.5em 1em; }
+    .friend-requests li .friend-accept {
+      color: green;
+      border: green 1px solid;
+      background: rgba(0, 128, 0, 0.3); }
+    .friend-requests li .friend-deny {
+      color: red;
+      border: red 1px solid;
+      background: rgba(255, 0, 0, 0.3); }
+
+#toast-notification {
+  background: #c8faff;
+  border: #96e1e6 1px solid;
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  max-width: 300px;
+  padding: 1em 0.25em;
+  position: fixed;
+  left: 2%;
+  bottom: 2%;
+  z-index: 9999;
+  display: flex;
+  flex-flow: row wrap;
+  animation: fadeInDown 0.5s; }
+  #toast-notification div {
+    margin: auto; }
+  #toast-notification #close-toast {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    background: none;
+    border: none;
+    color: rgba(0, 0, 0, 0.3); }
+
+@keyframes scaleX {
+  0% {
+    transform: scaleX(0); }
+  100% {
+    transform: scaleX(1); } }
+@keyframes scaleY {
+  0% {
+    transform: scaleY(0); }
+  100% {
+    transform: scaleY(1); } }
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(200%); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+/*# sourceMappingURL=app.css.map */

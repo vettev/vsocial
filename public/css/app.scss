@@ -1,0 +1,437 @@
+@import 'bootstrap.min.css';
+
+$border-standard: 1px solid #cccccc;
+$a-color: rgb(20, 100, 150);
+
+a
+{
+	color: $a-color;
+	transition: 0.3s all;
+
+	&:hover
+	{
+		color: darken($a-color, 15%);
+		text-decoration: none;
+	}
+}
+.main-header
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999999;
+}
+.main-content
+{
+	margin-top: 5em;
+}
+.modal
+{
+	top: 3em;
+}
+.navbar
+{
+	border-radius: 0;
+}
+#register-form
+{
+	border-left: $border-standard;
+}
+.birthdate
+{
+	input.form-control
+	{
+		width: 32%;
+	}
+}
+.errors
+{
+	.error
+	{
+		list-style: none;
+	}
+}
+div:not(.row) > .posts
+{
+	width: 60%;
+}
+.posts
+{
+
+	.post-form
+	{
+		text-align: center;
+		border: $border-standard;
+		margin-bottom: 2em;
+
+		h3
+		{
+			border-bottom: $border-standard;
+			margin: 0 0 0.5em 0;
+			padding: 0.25em;
+		}
+		textarea
+		{
+			margin-bottom: 0.5em;
+		}
+		form
+		{
+			margin: 0 1em 0.5em;
+		}
+		input[type="file"]
+		{
+			position: absolute;
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			z-index: -1;
+			overflow: hidden;
+		}
+		.btn
+		{
+			padding: 0.5em 2em;
+		}
+	}
+	.post
+	{
+		margin: 1em auto;
+		border: $border-standard;
+		padding: 1em;
+		position: relative;
+
+		.created-at
+		{
+			float: right;
+			font-size: 0.9em;
+			margin-right: 1em;
+
+			.edited
+			{
+				text-align: right;
+				font-size: 0.9em;
+			}
+		}
+		.created-by
+		{
+			padding-bottom: 0.5em;
+			margin-bottom: 0.5em;
+		}
+		.content
+		{
+			margin-bottom: 0.5em;
+			padding-bottom: 0.5em;
+			border-bottom: $border-standard;
+		}
+		.actions
+		{
+			.post-action
+			{
+				display: inline-block;
+				padding: 0.25em 1em;
+				border: $border-standard;
+			}
+			.post-like
+			{
+				color: green;
+
+				&:hover
+				{
+					background-color: rgba(green, 0.3);
+				}
+			}
+			.post-dislike
+			{
+				color: red;
+
+				&:hover
+				{
+					background-color: rgba(red, 0.3);
+				}
+			}
+			.liked
+			{
+				text-decoration: underline;
+			}
+		}
+		.comments
+		{
+			margin-top: 1em;
+			border-top: $border-standard;
+			padding-top: 0.5em;
+			transform-origin: 0 0;
+			animation: 0.5s scaleY;
+
+			.comment
+			{
+				padding: 1em;
+
+				a, div
+				{
+					display: inline-block;
+				}
+			}
+		}
+	}
+	.operations-button
+	{
+		background: none;
+		border: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.operations
+	{
+		display: none;
+		position: absolute;
+		left: 100%;
+		top: -1px;
+		border: $border-standard;
+		margin: 0;
+		padding: 0;
+		transform-origin: 0 0;
+		z-index: 9999;
+		animation: 0.5s scaleX;
+
+		li
+		{
+			list-style: none;
+			text-align: center;
+
+			a
+			{
+				display: block;
+				padding: 0.5em 2em;
+
+				&:hover
+				{
+					background: rgba(blue, 0.2);
+				}
+			}
+		}
+	}
+}
+.user-avatar
+{
+	border: $border-standard;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+}
+.reactions, .search-results
+{
+	margin: 0;
+	padding: 0;
+	li
+	{
+		list-style: none;
+		margin-bottom: 1em;
+
+		&:last-of-type
+		{
+			margin-bottom: 0;
+		}
+	}
+}
+.reactions-link
+{
+	.glyphicon-thumbs-down
+	{
+		transform: rotateY(180deg);
+	}
+}
+.user
+{
+	border: $border-standard;
+	padding: 1em;
+	margin-bottom: 2em;
+
+	.friends
+	{
+		border: $border-standard;
+		text-align: center;
+		display: flex;
+		flex-flow: row wrap;
+
+		.friend
+		{
+			margin: 0.5em auto;
+			position: relative;
+			cursor: pointer;
+
+			span
+			{
+				position: absolute;
+				color: lighten($a-color, 20%);
+				font-weight: bold;
+				bottom: 0;
+				left: 0;
+				text-align: center;
+				width: 100%;
+				padding: 0.5em 0;
+				background: rgba(black, 0.8);
+				z-index: 999;
+				transform-origin: 0 100%;
+				transform: scaleY(0);
+				transition: 0.3s all;
+			}
+			&:hover span
+			{
+				transform: scaleY(1);
+			}
+		}
+	}
+	.friend-action
+	{
+		float: right;
+	}
+	.friend-action:first-of-type
+	{
+		margin-left: 0.25em;
+	}
+}
+#friend-requests-li
+{
+	position: relative;
+
+	#friend-requests-notify
+	{
+		.count
+		{
+			border-radius: 200%;
+			padding: 0 0.35em;
+			font-size: 0.8em;
+			background: red;
+		}
+	}
+	#friend-notifications
+	{
+		position: absolute;
+		top: calc(100% + 1px);
+		right: 0;
+		min-width: 300px;
+		min-height: 100px;
+		border: $border-standard;
+		background: darken(white, 10%);
+		animation: 0.5s scaleY;
+		transform-origin: 0 0;
+		z-index: 9999;
+	}
+}
+.friend-requests
+{
+	margin: 0;
+	padding: 0.5em;
+
+	li
+	{
+		padding: 0;
+		list-style: none;
+		margin-bottom: 1.25em;
+		display: block;
+		border-bottom: $border-standard;
+
+		&:last-of-type
+		{
+			border-bottom: 0;
+			margin-bottom: 0;
+		}
+
+		& > a
+		{
+			display: block;
+		}
+		& > div
+		{
+			margin-top: 1em;
+			height: auto;
+			padding-bottom: 1em;
+		}
+		.friend-action
+		{
+			margin-top: 1em;
+			border-radius: 4px;
+			padding: 0.5em 1em;
+		}
+		.friend-accept
+		{
+			color: green;
+			border: green 1px solid;
+			background: rgba(green, 0.3);	
+		}
+		.friend-deny
+		{
+			color: red;
+			border: red 1px solid;
+			background: rgba(red, 0.3);
+		}
+	}
+}
+#toast-notification
+{
+	background: rgb(200, 250, 255);
+	border: rgb(150, 225, 230) 1px solid;
+	border-radius: 8px;
+	box-shadow: 1px 1px 2px rgba(black, 0.7);
+	max-width: 300px;
+	padding: 1em 0.25em;
+	position: fixed;
+	left: 2%;
+	bottom: 2%;
+	z-index: 9999;
+	display: flex;
+	flex-flow: row wrap;
+	animation: fadeInDown 0.5s;
+	
+	div
+	{
+		margin: auto;
+	}
+
+	
+	#close-toast
+	{
+		position: absolute;
+		top: 1%;
+		right: 1%;
+		background: none;
+		border: none;
+		color: rgba(black, 0.3);
+	}
+}
+
+@keyframes scaleX
+{
+	0%
+	{
+		transform: scaleX(0);
+	}
+	100%
+	{
+		transform: scaleX(1);
+	}
+}
+@keyframes scaleY
+{
+	0%
+	{
+		transform: scaleY(0);
+	}
+	100%
+	{
+		transform: scaleY(1);
+	}
+}
+@keyframes fadeInDown
+{
+	0%
+	{
+		opacity: 0;
+		transform: translateY(200%);
+	}
+	100%
+	{
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
