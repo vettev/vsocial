@@ -1,5 +1,6 @@
+<script src="//js.pusher.com/3.0/pusher.min.js"></script>
 <script>
-    var pusher = new Pusher("{{ env("PUSHER_KEY") }}", {
+    var pusher = new Pusher("{{ env('PUSHER_KEY') }}", {
         cluster: 'eu',
         encrypted: true,
         auth: {
@@ -12,7 +13,6 @@
     var channel = pusher.subscribe(channelName);
     channel.bind('add-friend', function(data) {
         $('#friend-requests-notify .count').html(data.requestsCount).show();
-        console.log('test');
     });
     channel.bind('friend-accepted', function(data) {
         var toast = $('#toast-notification');
@@ -26,6 +26,5 @@
         setTimeout(function() {
             toast.fadeOut();
         }, 10000);
-        console.log(data.user);
     });
 </script>

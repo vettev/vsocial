@@ -63,6 +63,27 @@ class PostController extends Controller
 
         return view('templates.post', ['post' => $post]);
     }
+    
+    public function showPosts($page = 1, Request $request)
+    {
+        if(!$request->ajax())
+            return null;
+        
+        $limit = env('PAGINATION_LIMIT');
+        $user = Auth::user();
+        $ids = [];
+        foreach ($user->getFriends() as $friend) {
+            $ids[] = $friend->id;
+        }
+        $ids[] = $user->id;
+    	$posts = Post::whereIn('user_id', $ids)
+            ->orderBy('created_at', 'desc')->take($limit)->skip(($page - 1) * $limit)->get();
+        
+        if(!$posts)
+            return null;
+        
+        return view('templates.posts', ['posts' => $posts]);
+    }
 
     public function like(Request $request)
     {

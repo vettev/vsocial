@@ -1,6 +1,6 @@
 		<div class="post" id="post-{{ $post->id }}" data-id="{{ $post->id }}">
 			@if($post->user->id === Auth::user()->id)
-				<button class="operations-button">&gt;</button>
+				<button class="operations-button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 				<ul class="operations">
 					<li><a href="{{ route('post.edit', ['id' => $post->id]) }}" class="ajax-link edit post-edit"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
 					<li><a href="{{ route('post.delete', ['id' => $post->id]) }}" class="ajax-link delete post-delete"><span class="glyphicon glyphicon-trash"></span> Delete</a></li>
@@ -29,12 +29,14 @@
 				@endphp
 				<a href="{{ route('post.like') }}" data-token="{{ Session::token() }}" class="ajax-link post-like post-action {{ $like ? $like->like ? 'liked' : '' : '' }}"><span class="glyphicon glyphicon-thumbs-up"></span> <span class="text">{{ $like ? $like->like ? 'You liked this' : 'Like' : 'Like' }}</span></a>
 				<a href="{{ route('post.like') }}" data-token="{{ Session::token() }}" class="ajax-link post-dislike post-action {{ $like ? $like->like == 0 ? 'liked' : '' : '' }}"><span class="glyphicon glyphicon-thumbs-down"></span> <span class="text">{{ $like ? $like->like == 0 ? 'You disliked this' : 'Dislike' : 'Dislike' }}</span></a>
-				<a href="#" class="post-action post-comments"><span class="glyphicon glyphicon-comment"></span> Comments: {{ count($post->comments) }}</a>
+				<a href="#" class="post-action post-comments"><span class="glyphicon glyphicon-comment"></span> Comments: <span class="count">{{ count($post->comments) }}</span></a>
 			</div>
-			<div class="comments" style="display: none;">
-				@foreach($post->comments as $comment)
-					@include('templates.comment')
-				@endforeach
+			<div class="comments-section" style="display: none;">
+				<div class="comments">
+					@foreach($post->comments as $comment)
+						@include('templates.comment')
+					@endforeach
+				</div>
 				<form action="{{ route('comment.new', ['id' => $post->id]) }}" class="comment-form ajax-form">
 					<input type="text" name="comment" placeholder="Comment content" class="form-control" autocomplete="off" />
 				</form>
