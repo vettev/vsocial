@@ -1,6 +1,6 @@
 var somethingOpen = false; //flag that checks if any closeable element is open
-var page = 1;
-var canLoad = true;
+var page = 1; //variable for posts pagination
+var canLoad = true; //flag that control loading posts
 
 $(document).ready(function()
 {
@@ -32,22 +32,6 @@ $(document).ready(function()
 		if(operations.hasClass('closeable-active'))
 			somethingOpen = true;
 	});
-
-	$('#friend-requests-notify').click(function(e) {
-		e.preventDefault();
-		var href = $(this).attr('href');
-		$.ajax({
-			url: href,
-			success: function(data) {
-				var notifs = $('#friend-notifications');
-				notifs.html(data);
-				notifs.toggle().toggleClass('closeable-active');
-
-				if(notifs.hasClass('closeable-active'))
-					somethingOpen = true;
-			}
-		});
-	});
 	
 	$('.user, #friend-notifications').on('click', '.friend-action', function(e) {
 		e.preventDefault();
@@ -57,9 +41,9 @@ $(document).ready(function()
 		var countElement = $('#friend-requests-notify .count');
 		$.ajax({
 			url: href,
-			success: function() {
+			success: function() {;
 				if(clicked.hasClass('friend-invite'))
-					clicked.html("Invitation sent");
+					clicked.html("Invitation sent").addClass('disabled');
 
 				if(clicked.hasClass('friend-accept') || clicked.hasClass('friend-deny'))
 				{
@@ -83,9 +67,8 @@ $(document).ready(function()
 		}
 	});
 
-	$('.main-content').on('click', '.ajax-link', function(e) {
+	$('body').on('click', '.ajax-link', function(e) {
 		e.preventDefault();
-
 		var href = $(this).attr('href');
 
 		if($(this).hasClass('delete'))
@@ -99,21 +82,7 @@ $(document).ready(function()
 				}
 			});
 		}
-		if($(this).hasClass('friend-action'))
-		{
-			var clicked = $(this);
-			$.ajax({
-				url: href,
-				success: function() {
-					if(clicked.hasClass('friend-invite'))
-						clicked.html("Invitation sent").addClass('disabled');
-
-					if(clicked.hasClass('friend-accept') || clicked.hasClass('friend-deny'))
-						clicked.parent().find('.friend-action').remove();
-				}
-			});
-		}
-		if($(this).hasClass('post-edit'))
+		else if($(this).hasClass('post-edit'))
 		{
 			var form = $('#post-edit-form');
 			var modal = $('#edit-modal');
@@ -137,9 +106,9 @@ $(document).ready(function()
 				});
 			});
 		}
-		if($(this).hasClass('post-action'))
+		else if($(this).hasClass('post-action'))
 		{
-			var token = $(this).data('token');
+			var token = $('meta[name="csrf-token"]').attr('content');
 			var postId = $(this).parent().parent().data('id');
 			var isLike = $(this).hasClass('post-like');
 			var clicked = $(this);
@@ -184,6 +153,36 @@ $(document).ready(function()
 		                clicked.prev().find('.text').html('Like');
 		            }
 		            clicked.parent().parent().find('a.reactions-link span.count').html(parseInt(msg.count));
+				}
+			});
+		}
+		else if($(this).hasClass('friend-notifications-link'))
+		{
+			$.ajax({
+				url: href,
+				success: function(data) {
+					var notifs = $('#friend-notifications');
+					notifs.html(data);
+					notifs.toggle().toggleClass('closeable-active');
+
+					if(notifs.hasClass('closeable-active'))
+						somethingOpen = true;
+				}
+			});			
+		}
+		else if($(this).hasClass('user-notifications-link'))
+		{
+			var link = $(this);
+			$.ajax({
+				url: href,
+				success: function(data) {
+					var notifs = $('#user-notifications');
+					notifs.html(data);
+					notifs.toggle().toggleClass('closeable-active');
+					link.find('.count').hide();
+
+					if(notifs.hasClass('closeable-active'))
+						somethingOpen = true;
 				}
 			});
 		}

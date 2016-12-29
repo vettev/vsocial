@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use VSocial\Post;
 use VSocial\Comment;
+use VSocial\Notifications\UserNotification;
 
 class CommentController extends Controller
 {

@@ -14,7 +14,8 @@
     channel.bind('add-friend', function(data) {
         $('#friend-requests-notify .count').html(data.requestsCount).show();
     });
-    channel.bind('friend-accepted', function(data) {
+    channel.bind('notification', function(data) {
+        $('#user-notifications-link .count').html(data.count).show();
         var toast = $('#toast-notification');
         toast.show();
         toast.find('.content').html(data.message);
@@ -22,6 +23,11 @@
         {
             var avatar = '{{  asset('storage') }}/' + data.avatar;
             toast.find('.avatar img').attr('src', avatar);
+        }
+        else
+        {
+            var avatar = '{{  asset('storage') }}/default-avatar.png';
+            toast.find('.avatar img').attr('src', avatar);   
         }
         setTimeout(function() {
             toast.fadeOut();

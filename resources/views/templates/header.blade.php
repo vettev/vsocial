@@ -32,14 +32,21 @@
             {{ csrf_field() }}
           </form>
       @else
-        <li id="friend-requests-li">
-          <a href="{{ route('friend.requests', ['id' => Auth::user()->id]) }}" id="friend-requests-notify">
+        <li id="friend-requests-li" class="notifications-li">
+          <a href="{{ route('friend.requests', ['id' => Auth::user()->id]) }}" id="friend-requests-notify" class="friend-notifications-link ajax-link">
             <span class="glyphicon glyphicon-user"></span>
             <span class="count" style="{{ count(Auth::user()->getFriendRequests()) == 0 ? 'display: none;' : '' }}">
                     {{ count(Auth::user()->getFriendRequests()) }}
               </span>
           </a>
-          <div id="friend-notifications" style="display: none;">
+          <div id="friend-notifications" style="display: none;" class="notifications-block">
+          </div>
+        </li>
+        <li id="user-notifications-li" class="notifications-li">
+          <a href="{{ route('user.notifications') }}" class="ajax-link user-notifications-link" id="user-notifications-link"><span class="glyphicon glyphicon-bell"></span>
+          <span class="count" style="{{ count(Auth::user()->unreadNotifications) == 0 ? 'display: none;' : '' }}">{{ count(Auth::user()->unreadNotifications) }}</span>
+          </a>
+          <div id="user-notifications" style="display: none;" class="notifications-block">
           </div>
         </li>
         <li>

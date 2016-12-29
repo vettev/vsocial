@@ -27,8 +27,8 @@
 				@php
 					$like = Auth::user()->likes->where('post_id', $post->id)->first();
 				@endphp
-				<a href="{{ route('post.like') }}" data-token="{{ Session::token() }}" class="ajax-link post-like post-action {{ $like ? $like->like ? 'liked' : '' : '' }}"><span class="glyphicon glyphicon-thumbs-up"></span> <span class="text">{{ $like ? $like->like ? 'You liked this' : 'Like' : 'Like' }}</span></a>
-				<a href="{{ route('post.like') }}" data-token="{{ Session::token() }}" class="ajax-link post-dislike post-action {{ $like ? $like->like == 0 ? 'liked' : '' : '' }}"><span class="glyphicon glyphicon-thumbs-down"></span> <span class="text">{{ $like ? $like->like == 0 ? 'You disliked this' : 'Dislike' : 'Dislike' }}</span></a>
+				<a href="{{ route('post.like') }}" class="ajax-link post-like post-action {{ $like ? $like->like ? 'liked' : '' : '' }}"><span class="glyphicon glyphicon-thumbs-up"></span> <span class="text">{{ $like ? $like->like ? 'You liked this' : 'Like' : 'Like' }}</span></a>
+				<a href="{{ route('post.like') }}" class="ajax-link post-dislike post-action {{ $like ? $like->like == 0 ? 'liked' : '' : '' }}"><span class="glyphicon glyphicon-thumbs-down"></span> <span class="text">{{ $like ? $like->like == 0 ? 'You disliked this' : 'Dislike' : 'Dislike' }}</span></a>
 				<a href="#" class="post-action post-comments"><span class="glyphicon glyphicon-comment"></span> Comments: <span class="count">{{ count($post->comments) }}</span></a>
 			</div>
 			<div class="comments-section" style="display: none;">

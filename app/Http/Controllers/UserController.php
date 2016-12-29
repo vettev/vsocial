@@ -3,7 +3,9 @@
 namespace VSocial\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications;
 use Illuminate\Support\Facades\App;
+use VSocial\Notifications\UserNotification;
 use VSocial\User;
 use Auth;
 
@@ -92,7 +94,10 @@ class UserController extends Controller
         
         $channel = "private-user-".$recipient->id;
         $message = $user->first_name.' '.$user->last_name.' has accepted your friend request';
-        $this->pusher->trigger($channel, 'friend-accepted', ['avatar' => $user->avatar, 'message' => $message]);
+        $data = ['avatar' => $user->avatar, 'message' => $message];
+        $recipient->notify(new UserNotification($data));
+        $data['count'] = count($recipient->unreadNotifications);
+        $this->pusher->trigger($channel, 'notification', $data);
 
     	return null;
     }
@@ -120,5 +125,17 @@ class UserController extends Controller
     	}
 
     	return view('user.friend-requests', ['request_users' => $users]);
+    }
+
+    public function userNotifications(Request $request)
+    {
+        if(!$request->ajax())
+            return redirect()->route('home');
+
+        $notifications = Auth::user()->notifications;
+        if(!$notifications)
+            return null;
+
+        return view('user.notifications', ['notifications' => $notifications]);
     }
 }

@@ -78,6 +78,12 @@ Route::get('/user/{id}/posts/{page?}', [
 	'as' => 'user.posts'
 ]);
 
+Route::get('/user/notifications', [
+	'uses' => 'UserController@userNotifications',
+	'as' => 'user.notifications',
+	'middleware' => 'auth'
+	]);
+
 Route::get('/user/{id}/add-friend', [
 	'uses' => 'UserController@friendRequest',
 	'as' => 'friend.request',

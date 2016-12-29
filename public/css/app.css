@@ -95,7 +95,8 @@ div:not(.row) > .posts {
     transform-origin: 0 0;
     animation: 0.5s scaleY;
     max-height: 250px;
-    overflow-y: scroll; }
+    overflow-y: scroll;
+    max-height: 200px; }
     .posts .post .comments .comment {
       padding: 0.5em 1em; }
       .posts .post .comments .comment a, .posts .post .comments .comment div {
@@ -186,18 +187,18 @@ div:not(.row) > .posts {
   .user .friend-action:first-of-type {
     margin-left: 0.25em; }
 
-#friend-requests-li {
+.notifications-li {
   position: relative; }
-  #friend-requests-li #friend-requests-notify .count {
+  .notifications-li .ajax-link .count {
     border-radius: 200%;
     padding: 0 0.35em;
     font-size: 0.8em;
     background: red; }
-  #friend-requests-li #friend-notifications {
+  .notifications-li .notifications-block {
     position: absolute;
     top: calc(100% + 1px);
     right: 0;
-    min-width: 300px;
+    width: 300px;
     min-height: 100px;
     border: 1px solid #cccccc;
     background: #e6e6e6;
@@ -212,8 +213,7 @@ div:not(.row) > .posts {
     padding: 0;
     list-style: none;
     margin-bottom: 1.25em;
-    display: block;
-    border-bottom: 1px solid #cccccc; }
+    display: block; }
     .friend-requests li:last-of-type {
       border-bottom: 0;
       margin-bottom: 0; }
@@ -235,6 +235,23 @@ div:not(.row) > .posts {
       color: red;
       border: red 1px solid;
       background: rgba(255, 0, 0, 0.3); }
+
+.user-notifications {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .user-notifications li {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0.5em 0;
+    margin: 0;
+    border-bottom: 1px solid #cccccc; }
+    .user-notifications li:last-of-type {
+      border-bottom: 0; }
+    .user-notifications li div {
+      margin: auto; }
+  .user-notifications .unread {
+    background: rgba(50, 150, 255, 0.25); }
 
 #toast-notification {
   background: #c8faff;
