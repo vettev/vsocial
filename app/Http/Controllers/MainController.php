@@ -13,18 +13,7 @@ class MainController extends Controller
     public function index()
     {
     	if(Auth::user())
-    	{
-            $user = Auth::user();
-            $ids = [];
-            foreach ($user->getFriends() as $friend) {
-                $ids[] = $friend->id;
-            }
-            $ids[] = $user->id;
-    		$posts = Post::whereIn('user_id', $ids)
-                ->orderBy('created_at', 'desc')->get();
-
-    		return view('home', ['posts' => $posts]);
-    	}
+    		return view('home');
     	else
     		return view('welcome');
     }

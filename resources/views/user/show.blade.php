@@ -26,12 +26,14 @@
 				@endforeach
 			</div>
 		</div>
-		<div class="posts col-lg-7 col-md-7 col-sm-12 col-xs-12">
+		<div class="posts col-lg-7 col-md-7 col-sm-12 col-xs-12" data-source="{{ route('user.posts', ['id' => $user->id]) }}">
 			@include('templates.post-form')
-			@foreach($user->posts as $post)
-				@include('templates.post')
-			@endforeach
-			@include('templates.modals')
+			<div class="loader" id="post-loader" style="display: none;">
+				<span></span>
+				<span></span>
+				<span></span>
+        	</div>
 		</div>
+		@include('templates.modals')
 	</div>
 @endsection

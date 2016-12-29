@@ -57,6 +57,21 @@ class UserController extends Controller
 
     	return redirect()->route('user.account');
     }
+    
+    public function userPosts(Request $request, $id, $page=1)
+    {
+        if(!$request->ajax())
+            return null;
+        
+        $limit = env('PAGINATION_LIMIT');
+        $user = User::find($id);
+        $posts = $user->posts()->take($limit)->skip(($page - 1) * $limit)->orderBy('created_at', 'desc')->get();
+        if(!$posts)
+            return null;
+        
+        return view('templates.posts', ['posts' => $posts]);
+    }
+    
     public function friendRequest($id)
     {
     	$user = Auth::user();
@@ -68,6 +83,7 @@ class UserController extends Controller
 
     	return null;
     }
+    
     public function acceptFriend($id)
     {    	
     	$user = Auth::user();

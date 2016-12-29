@@ -73,6 +73,11 @@ Route::post('/user/account/save', [
 	'middleware' => 'auth'
 	]);
 
+Route::get('/user/{id}/posts/{page?}', [
+	'uses' => 'UserController@userPosts',
+	'as' => 'user.posts'
+]);
+
 Route::get('/user/{id}/add-friend', [
 	'uses' => 'UserController@friendRequest',
 	'as' => 'friend.request',
@@ -106,6 +111,12 @@ Route::post('/search', [
 Route::post('/pusher/auth', [
 	'uses' => 'MainController@pusherAuth',
 	'as' => 'pusher.auth'
+]);
+
+Route::get("/posts/load/{page?}", [
+	'uses' => 'PostController@showPosts',
+	'as' => 'posts.load',
+	'middleware' => 'auth'
 ]);
 
 Auth::routes();
