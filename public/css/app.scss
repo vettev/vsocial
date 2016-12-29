@@ -161,8 +161,12 @@ div:not(.row) > .posts
 			padding-top: 0.5em;
 			transform-origin: 0 0;
 			animation: 0.5s scaleY;
+<<<<<<< HEAD
 			max-height: 250px;
 			overflow-y: scroll;
+=======
+			max-height: 200px;
+>>>>>>> e47f9ece85f14e9fb6a7e19b43e7756033d624e3
 
 			.comment
 			{
